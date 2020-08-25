@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fitness-tracker-c7a63": {
+      "hosting": {
+        "fitness-tracker": [
+          "fitness-tracker-c7a63"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fitness-tracker-pro"
+  }
+}

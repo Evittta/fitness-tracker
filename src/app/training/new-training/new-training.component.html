@@ -1,0 +1,47 @@
+<section class="new-training" fxLayout fxLayoutAlign="center">
+  <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
+    <mat-card fxFlex.xs="100%" fxFlex="400px">
+      <mat-card-title fxLayoutAlign="center">
+        Time to Start a workout!
+      </mat-card-title>
+      <mat-card-content fxLayoutAlign="center">
+        <mat-form-field
+          appearance="fill"
+          *ngIf="!(isLoading$ | async) && (exercises$ | async)"
+        >
+          <mat-label>Choose Training</mat-label>
+          <mat-select ngModel name="exercise" required>
+            <mat-option
+              *ngFor="let exercise of exercises$ | async"
+              [value]="exercise.id"
+            >
+              {{ exercise.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-spinner *ngIf="isLoading$ | async" color="accent"></mat-spinner>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="center">
+        <button
+          *ngIf="!(isLoading$ | async) && (exercises$ | async)"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid"
+          type="submit"
+        >
+          Start
+        </button>
+        <button
+          *ngIf="!(exercises$ | async)"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid"
+          type="button"
+          (click)="fetchExercises()"
+        >
+          Fetch again
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>
